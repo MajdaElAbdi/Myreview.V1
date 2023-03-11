@@ -1,0 +1,48 @@
+
+<div class="container mt-2">
+  <ng-container *ngIf="ListProduits | async as data; else failureOrLoading">
+
+    <div class="card">
+      <div class="card-header">Liste des produits</div>
+        <div class="card-body">
+          <table class="table">
+           <thead>
+           <tr>
+             <th>ID</th> <th>Nom</th><th>Prix</th> <th>Id_user</th><th>Image</th>
+           </tr>
+           </thead>
+            <tbody>
+             <tr *ngFor="let p of ListProduits |  async ">
+               <td>{{p._id}}</td>
+               <td>{{p.nom}}</td>
+               <td>{{p.prix}}</td>
+               <td>{{p.id_user}}</td>
+               <!--<td>{{p.image}}</td>-->
+               <td>
+                 <button (click)="Supprimer(p)" class="btn btn-danger" >
+                   <i class="bi bi-trash"></i>
+                 </button>
+               </td>
+             </tr>
+            </tbody>
+          </table>
+        </div>
+
+    </div>
+
+  </ng-container>
+
+  <ng-container>
+    <ng-template #failureOrLoading>
+      <ng-container *ngIf="ErrorMessage; else Loading">
+        <div class="text-danger">
+          {{ErrorMessage}}
+        </div>
+      </ng-container>
+      <ng-template #Loading>
+        Produits en cours de chargement .......
+      </ng-template>
+    </ng-template>
+  </ng-container>
+
+</div>
