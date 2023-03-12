@@ -1,10 +1,13 @@
 const mongoose = require("mongoose");
 const user = require('../models/users').User;
 
-const saveUser = async (user) => {
+const saveUser = async (user1) => {
     try {
-        await user.save();
+        const user2 =new user(user1);
+        await user2.save();
+        
         console.log("user saved successfully!");
+        return user2;
     } catch (error) {
         console.error(error);
     }
@@ -19,6 +22,21 @@ var c='hi';
         const users = await user.findById(id);
         c='hoo';
         console.log('getUser');
+        return users;
+    }catch (error) {
+            throw new Error(`Error retrieving product with id ${id}: ${error}`);
+        }
+    }; 
+   
+
+    
+const getByEmail = async (email) => {
+
+    try {
+console.log('getUser');
+ 
+        const users = await user.findOne(email);
+        
         return users;
     }catch (error) {
             throw new Error(`Error retrieving product with id ${id}: ${error}`);
@@ -62,6 +80,7 @@ module.exports = {
     getUser,
     getAllUsers,
     deleteUser,
-    updateUser
+    updateUser,
+    getByEmail
 
 };

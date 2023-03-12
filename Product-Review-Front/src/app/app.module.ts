@@ -8,11 +8,13 @@ import { ProduitsComponent } from './produits/produits.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import { UsersComponent } from './users/users.component';
+import { LoginComponent } from './login/login.component';
 
 
 const routes: Routes =[
   { path: "produits", component:ProduitsComponent},
   { path: "users", component:UsersComponent},
+  {path: "login", component:LoginComponent}
 ]
 
 
@@ -21,7 +23,8 @@ const routes: Routes =[
     AppComponent,
     NavBarComponent,
     ProduitsComponent,
-    UsersComponent
+    UsersComponent,
+    LoginComponent
   ],
 
   imports: [

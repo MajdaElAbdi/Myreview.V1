@@ -41,6 +41,14 @@ router.get('/:id', async (req, res) => {
        res.status(500).send(error.message);  
       }});
 
+
+      router.get('/:email', async (req, res) => {    
+        try {        console.log(req.params.email); 
+            const user= await UsersFetcher.getByEmail(req.params.email);
+        res.json(user);   
+     } catch (error) {     
+           res.status(500).send(error.message);  
+          }});
 router.delete('/:id', async  (req, res)=>{   
      try{       
 
@@ -53,34 +61,20 @@ router.delete('/:id', async  (req, res)=>{
 
 
 router.post('/', async  (req, res)=>{ 
-    // validate request
+     
     
-    if(!req.body){
-        res.status(400).send({ message : "Content can not be emtpy!"});
-        return;
-    }
-    // new user
     try{
- 
-      const newUser = new User({
-        name : req.body.name,
-        email : req.body.email,
-        gender: req.body.gender,
-        status : req.body.status,
-        date: req.body.date,
-        password : req.body.password
-
-    });
- 
-
-    const user = await UsersFetcher.saveUser(newUser);
+        console.log(req.body); 
+        
+    const user = await UsersFetcher.saveUser(req.body);
+    console.log('hooooooooooooo');
+    console.log(user);
     res.json(user);}
     catch(error)
     {
         console.log(error.message);
     }
-
-    // save user in the database
+ 
    
 });
 
@@ -93,9 +87,7 @@ console.log(req.params.id);
         return;
     }
 
-    // new user
- 
- 
+  
     const user = await UsersFetcher.updateUser(req.params.id,req.body);
     
     res.json(user);

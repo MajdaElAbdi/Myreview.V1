@@ -36,7 +36,7 @@ ErrorMessage! : string;
 
   Supprimer(p: ProduitModel) {
 
-    this.ListProduits=this.http.get<Array<ProduitModel>>("localhost:3000/produits");
+    this.ListProduits=this.http.get<Array<ProduitModel>>("localhost:3007/produits");
 
   }
 }
