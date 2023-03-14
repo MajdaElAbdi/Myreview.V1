@@ -65,13 +65,18 @@ export class LoginComponent {
           this.isAdmin = true;
           localStorage.setItem('isAdmin', String(this.isAdmin));
         }
-        else { this.isAdmin = false; localStorage.setItem('isAdmin', String(this.isAdmin)); }
+        else { 
+          this.isAdmin = false; 
+        localStorage.setItem('isAdmin', String(this.isAdmin)); 
+        }
+
         localStorage.setItem('id', String(this.user._id));
         localStorage.setItem('Role', String(this.role));
         localStorage.setItem('loggedUser', this.loggedUser);
         localStorage.setItem('isloggedIn', String(this.isloggedIn));
-        
+        this.router.navigate(['produits']);
       }
+      else {alert("problem in your authentification :either your password or the email ane correct");}
     }}
 
 
@@ -89,7 +94,7 @@ export class LoginComponent {
         this.router.navigate(['produits']);
       }
     }
-    sinscire() { this.router.navigate(['inscription']); }
+    sinscire() { this.router.navigate(['sign-in']); }
 
 
   }
