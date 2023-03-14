@@ -4,6 +4,12 @@ const  ProductsFetcher = require('../services/ProductService');
 
 
 
+
+
+
+
+
+
 router.get('/', async (req, res) => {
     try {
         const product = await ProductsFetcher.getAllProducts();
@@ -37,15 +43,21 @@ router.delete('/:id', async  (req, res)=>{
 
 router.post('/', async  (req, res)=>{
     try{
-        const content=req.body;
-        console.log(content);
-        ProductsFetcher.saveProduct(content)
-            .then(newProduit => {
-                res.status(201).json(newProduit);
-
+        ProductsFetcher.saveProduct(req.body)
+            .then(newProduct => {
+                res.status(201).json(newProduct);
             });
     }catch (error){
-        console.log(error.message);
+        res.status(500).send(error.message);
+    }
+});
+
+
+router.put('/:id/update', async  (req, res)=>{
+    try{
+        const c = await ProductsFetcher.updateProduct(req.params.id, req.body);
+        res.json(c);
+    }catch (error){
         res.status(500).send(error.message);
     }
 });

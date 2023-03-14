@@ -5,10 +5,12 @@ const produit = require('../models/produits').Produit;
 
 
 
-const saveProduct = async (produit) => {
+const saveProduct = async (product) => {
     try {
-        await produit.save();
+        const newProduct = new produit(product);
+        await newProduct.save();
         console.log("Product saved successfully!");
+        return newProduct;
     } catch (error) {
         console.error(error);
     }
@@ -24,7 +26,8 @@ const getProduct = async (id) => {
     } catch (error) {
         throw new Error(`Error retrieving product with id ${id}: ${error}`);
     }
-}; 
+};
+
 
 
 const getAllProducts = async () => {
