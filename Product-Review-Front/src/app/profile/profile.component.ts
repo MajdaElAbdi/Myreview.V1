@@ -7,16 +7,17 @@ import { Component } from '@angular/core';
 })
 export class ProfileComponent {
 email!:any;
-role!:any;
+gender!:any;
+name!:any;
+dateOfBirth!:any;
+
 ngOnInit() : void{
 
-this.email=localStorage.getItem('loggedUser');
-
-console.log("this.email");
-console.log(this.email);
-this.role=localStorage.getItem('Role');
-
-
+this.email=localStorage.getItem('email');
+this.name=localStorage.getItem('name');
+this.dateOfBirth=localStorage.getItem('dateOfBirth');
+alert(this.dateOfBirth);
+this.gender=localStorage.getItem('gender');
 }
 
 

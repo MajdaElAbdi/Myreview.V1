@@ -32,7 +32,7 @@ password: {
 
 });
 
-const User = mongoose.model('user8', userSchema);
+const User = mongoose.model('userrrr', userSchema);
 
 module.exports = {User};
 

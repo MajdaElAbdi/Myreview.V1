@@ -4,7 +4,7 @@ export interface UserModel{
     _id : string ;
     name :  string;
     email :  string;
-    date :  string;
+    date :  Date;
     password:string;
     gender:string;
     address:string;

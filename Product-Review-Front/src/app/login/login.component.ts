@@ -21,7 +21,7 @@ export class LoginComponent {
   public error: number = 0;
   ErrorMessage: any;
   user!: UserModel;
-
+  date!:Date; 
   constructor(private router: Router, public serviceLogin: LoginServiceService, private Fb: FormBuilder) { }
 
   ngOnInit(): void {
@@ -71,10 +71,22 @@ export class LoginComponent {
         }
 
         localStorage.setItem('id', String(this.user._id));
-        localStorage.setItem('Role', String(this.role));
-        localStorage.setItem('loggedUser', this.loggedUser);
+        localStorage.setItem('name', String(this.user.name));
+        localStorage.setItem('email', this.user.email);
+        localStorage.setItem('gender', this.user.gender);
+       // let date=this.user.date.getFullYear.toString()+'/'+this.user.date.getMonth.toString()+'/'+this.user.date.getDay.toString();
+       
+       this.date=this.user.date
+     
+        localStorage.setItem('dateOfBirth',this.user.date.getFullYear.toString() );
         localStorage.setItem('isloggedIn', String(this.isloggedIn));
         this.router.navigate(['produits']);
+
+       /* name: this.Fb.control("" ),
+email: this.Fb.control("",[Validators.required, Validators.email]),
+date: this.Fb.control(""),
+password: this.Fb.control("",[Validators.required ]),
+genre:this.Fb.control("")*/
       }
       else {alert("problem in your authentification :either your password or the email ane correct");}
     }}

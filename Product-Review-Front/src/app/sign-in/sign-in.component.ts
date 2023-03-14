@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import {UserModel} from "../Models/user";
 import {catchError, Observable, throwError} from "rxjs";
- 
+import { Router } from '@angular/router';
 import {HttpClient} from "@angular/common/http";
 import { UserServiceService } from '../Services/user-service.service ';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-sign-in',
@@ -12,11 +12,12 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
   styleUrls: ['./sign-in.component.css']
 })
 export class SignInComponent {
+  @ViewChild('loginForm') loginForm!: NgForm;
   profileForm!:FormGroup;
   ListUsers! : Observable<Array<UserModel>>;
   ErrorMessage! : string;
  
-  constructor(private userService: UserServiceService,private Fb:FormBuilder  ) {
+  constructor(private userService: UserServiceService,private Fb:FormBuilder,private router: Router   ) {
 
   }
 
@@ -27,12 +28,17 @@ name: this.Fb.control("" ),
 email: this.Fb.control("",[Validators.required, Validators.email]),
 date: this.Fb.control(""),
 password: this.Fb.control("",[Validators.required ]),
-genre:this.Fb.control("")
-
+gender:this.Fb.control(""),
+userType:this.Fb.control(""),
+address:this.Fb.control("",[Validators.required ])
 });
 
  
 
+  }
+  onSubmit() {
+    console.log(this.loginForm.value);
+    // Do login here
   }
 
 addUser(){
@@ -46,13 +52,15 @@ addUser(){
 
   }
 add(){
-let user= this.profileForm.value;
- 
+let user= this.loginForm.value;
+console.log(user);
 this.userService.addUser(user).subscribe({
 
   next:value=>{
     //route
-    alert('user est ajoute')},
+    alert('user est ajoute');
+    this.router.navigate(['/login']);
+  },
     error:err=>{console.log(err)}
 });
 }

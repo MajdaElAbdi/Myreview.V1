@@ -17,6 +17,7 @@ BackenURL : string = "http://localhost:3007";
   public getAllusers() : Observable<Array<UserModel>>{
     return this.http.get<Array<UserModel>>(this.BackenURL+"/users");
   }
+  
 /*
   public postUser() : Observable<UserModel>{
     return this.http.post<UserModel>(this.BackenURL+"/users");
