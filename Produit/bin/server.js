@@ -15,7 +15,7 @@ const router = express.Router();
 const app = express();
 const bodyParser = require("body-parser")
 const commentRouter=require('../routes/CommentRoute').router;
-// New app using express module
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended:true
