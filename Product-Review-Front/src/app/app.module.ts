@@ -10,13 +10,15 @@ import {HttpClientModule} from "@angular/common/http";
 import { UsersComponent } from './users/users.component';
 import { LoginComponent } from './login/login.component';
 import { SignInComponent } from './sign-in/sign-in.component';
+import { ProfileComponent } from './profile/profile.component';
 
 
 const routes: Routes =[
   { path: "produits", component:ProduitsComponent},
   { path: "users", component:UsersComponent},
   {path: "login", component:LoginComponent},
-  {path: "signin", component:SignInComponent}
+  {path: "signin", component:SignInComponent},
+  {path: "profile", component:ProfileComponent}
 ]
 
 
@@ -27,7 +29,8 @@ const routes: Routes =[
     ProduitsComponent,
     UsersComponent,
     LoginComponent,
-    SignInComponent
+    SignInComponent,
+    ProfileComponent
   ],
 
   imports: [
