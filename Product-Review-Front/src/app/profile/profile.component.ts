@@ -18,7 +18,9 @@ dateOfBirth!:any;
 user!:UserModel;
 id!:any;
 address!:any;
+image!:any;
 userType!:any;
+age!:any;
 constructor(private router: Router, public serviceProfile:ProfileService, private Fb: FormBuilder) { }
 
 ngOnInit() : void{
@@ -38,7 +40,12 @@ this.serviceProfile.getUser(this.id).subscribe({
     this.name=this.user.name;
     this.dateOfBirth=this.user.date;
     this.userType=this.user.userType;
-
+    this.image=this.user.image;
+    this.address=this.user.address;
+    const bdate = new Date(this.dateOfBirth);
+    const timeDiff = Math.abs(Date.now() - bdate.getTime() );
+    this.age = Math.floor((timeDiff / (1000 * 3600 * 24)) / 365);
+     
   }), error: err => {
     console.log(err);
   }

@@ -35,9 +35,9 @@ export class LoginComponent {
     this.loginForm = this.Fb.group({
 
 
-      email: this.Fb.control("", [Validators.required, Validators.email]),
+      email: this.Fb.control("" ),
 
-      password: this.Fb.control("", [Validators.required])
+      password: this.Fb.control("")
 
     });
 
