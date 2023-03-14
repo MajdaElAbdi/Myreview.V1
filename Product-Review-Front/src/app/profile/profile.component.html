@@ -14,9 +14,13 @@
             <p>address:{{address}}</p> 
             <p>user type:{{userType}}</p> 
             
-          </div>
-  
-      </div>
+          </div> 
+          <br> 
+          <button class="btn btn-secondary" (click)="update()">Update profile</button>
+          <button class="btn btn-secondary" (click)="voirPublications()">publications</button>
+
+    </div>
+    
    
   
     <ng-container>
@@ -32,4 +36,166 @@
     </ng-container>
   
   </div>
+  
+  <div class="container mt-2">
+    <div class="d-flex flex-row flex-wrap justify-content-center">
+      <div class="card mr-2 w-25 h-100 mx-3 my-3" *ngFor="let p of this.ListProduits| async">
+        <div class="card-img-top" style="height: 200px; overflow: hidden;">
+          <img src="{{p.photo}}" alt="{{p.title}}" style="height: 100%; object-fit: cover; object-position: center;">
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">{{p.title}}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">{{p.price}} €</h6>
+          <div class="rating-container">
+            <span class="rating-label">Noter:</span>
+            <div class="rating-stars">
+              <i id="{{ 'star-1-' + p._id }}" class="far fa-star" (mouseover)="highlightStar(p._id, 1)" (mouseout)="resetStars(p._id,1)" (click)="rateProduct(p, 1)"></i>
+              <i id="{{ 'star-2-' + p._id }}" class="far fa-star" (mouseover)="highlightStar(p._id, 2)" (mouseout)="resetStars(p._id,2)" (click)="rateProduct(p, 2)"></i>
+              <i id="{{ 'star-3-' + p._id }}" class="far fa-star" (mouseover)="highlightStar(p._id, 3)" (mouseout)="resetStars(p._id,3)" (click)="rateProduct(p, 3)"></i>
+              <i id="{{ 'star-4-' + p._id }}" class="far fa-star" (mouseover)="highlightStar(p._id, 4)" (mouseout)="resetStars(p._id,4)" (click)="rateProduct(p, 4)"></i>
+              <i id="{{ 'star-5-' + p._id }}" class="far fa-star" (mouseover)="highlightStar(p._id, 5)" (mouseout)="resetStars(p._id,5)" (click)="rateProduct(p, 5)"></i>
+            </div>
+          </div>
+          <button class="btn btn-secondary" (click)="openCommentBox(p._id)">Commenter</button>
+          <div class="comment-box-overlay" [hidden]="!showCommentBox" (click)="closeCommentBox()"></div>
+          <div class="comment-box" [hidden]="!showCommentBox">
+            <button class="close-button" (click)="closeCommentBox()">&#10005;</button>
+            <div class="comment-input-container">
+              <textarea (input)="redimensionnerTextarea()" #commentTextarea class="comment-text" [(ngModel)]="TextAreacommentaire" (keydown.enter)="envoyerCommentaire(p._id)"></textarea>
+              <div class="comment-input-icons">
+                <i class="fas fa-camera" title="Charger une photo"></i>
+                <i class="far fa-smile" title="Ajouter un emoji"></i>
+                <i class="fas fa-paper-plane" title="Envoyer le commentaire" (click)="envoyerCommentaire(p._id)"></i>
+              </div>
+            </div>
+  
+              <div class="comment-container" [hidden]="!showComments">
+                <h4 class="card-title ">Commentaires :</h4>
+                <div class="comment-list">
+                  <div class="comment-item" *ngFor="let comment of ListCommentaires | async" id="commentList-{{ comment._id }}">
+                    <div class="comment-avatar">
+                      <img src="{{ comment.images}}" >
+                    </div>
+                    <div class="comment-content">
+                      <div class="comment-header">
+                        <span class="comment-author">{{p.title}}</span>
+                        <span class="comment-date">{{ comment.date_comment | date: 'dd/MM/yyyy' }}</span>
+                      </div>
+                      <div class="comment-body">
+                        {{ comment.contents }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+  
+  
+  
+  
+  <!--footer à compléter-->
+  <div class="container-fluid my-5">
+  
+    <footer class="bg-dark text-center text-lg-start text-white">
+      <!-- Grid container -->
+      <div class="container p-4">
+        <!--Grid row-->
+        <div class="row mt-4">
+          <!--Grid column-->
+          <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+            <h5 class="text-uppercase">See other books</h5>
+  
+            <ul class="list-unstyled mb-0">
+              <li>
+                <a href="#!" class="text-white"><i class="fas fa-book fa-fw fa-sm me-2"></i>Bestsellers</a>
+              </li>
+              <li>
+                <a href="#!" class="text-white"><i class="fas fa-book fa-fw fa-sm me-2"></i>All books</a>
+              </li>
+              <li>
+                <a href="#!" class="text-white"><i class="fas fa-user-edit fa-fw fa-sm me-2"></i>Our authors</a>
+              </li>
+            </ul>
+          </div>
+          <!--Grid column-->
+  
+          <!--Grid column-->
+          <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+            <h5 class="text-uppercase">Execution of the contract</h5>
+  
+            <ul class="list-unstyled">
+              <li>
+                <a href="#!" class="text-white"><i class="fas fa-shipping-fast fa-fw fa-sm me-2"></i>Supply</a>
+              </li>
+              <li>
+                <a href="#!" class="text-white"><i class="fas fa-backspace fa-fw fa-sm me-2"></i>Returns</a>
+              </li>
+              <li>
+                <a href="#!" class="text-white"><i class="far fa-file-alt fa-fw fa-sm me-2"></i>Regulations</a>
+              </li>
+              <li>
+                <a href="#!" class="text-white"><i class="far fa-file-alt fa-fw fa-sm me-2"></i>Privacy policy</a>
+              </li>
+            </ul>
+          </div>
+          <!--Grid column-->
+  
+          <!--Grid column-->
+          <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+            <h5 class="text-uppercase">Publishing house</h5>
+  
+            <ul class="list-unstyled">
+              <li>
+                <a href="#!" class="text-white">The BookStore</a>
+              </li>
+              <li>
+                <a href="#!" class="text-white">123 Street</a>
+              </li>
+              <li>
+                <a href="#!" class="text-white">05765 NY</a>
+              </li>
+              <li>
+                <a href="#!" class="text-white"><i class="fas fa-briefcase fa-fw fa-sm me-2"></i>Send us a book</a>
+              </li>
+            </ul>
+          </div>
+          <!--Grid column-->
+  
+          <!--Grid column-->
+          <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+            <h5 class="text-uppercase">Write to us</h5>
+  
+            <ul class="list-unstyled">
+              <li>
+                <a href="#!" class="text-white"><i class="fas fa-at fa-fw fa-sm me-2"></i>Help in purchasing</a>
+              </li>
+              <li>
+                <a href="#!" class="text-white"><i class="fas fa-shipping-fast fa-fw fa-sm me-2"></i>Check the order status</a>
+              </li>
+              <li>
+                <a href="#!" class="text-white"><i class="fas fa-envelope fa-fw fa-sm me-2"></i>Join the newsletter</a>
+              </li>
+            </ul>
+          </div>
+          <!--Grid column-->
+        </div>
+        <!--Grid row-->
+      </div>
+      <!-- Grid container -->
+  
+      <!-- Copyright -->
+      <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+        © 2021 Copyright:
+        <a class="text-white" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+      </div>
+      <!-- Copyright -->
+    </footer>
+  
+  </div>
+  
   

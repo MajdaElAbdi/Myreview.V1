@@ -28,6 +28,16 @@ const getProduct = async (id) => {
     }
 };
 
+const getProductByOwner = async (ownerId) => {
+
+    try {
+
+        const products = await produit.find({owner:ownerId});
+        return products;
+    } catch (error) {
+        throw new Error(`Error retrieving product with id ${id}: ${error}`);
+    }
+};
 
 
 const getAllProducts = async () => {
@@ -64,6 +74,7 @@ module.exports = {
     getProduct,
     getAllProducts,
     deleteProduct,
-    updateProduct
+    updateProduct,
+    getProductByOwner
 
 };
