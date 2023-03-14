@@ -115,7 +115,10 @@ export class LoginComponent {
         this.router.navigate(['produits']);
       }
     }
-    sinscire() { this.router.navigate(['signin']); }
+
+    sinscire() {
+    this.router.navigate(['signin']);
+  }
 
 
   }

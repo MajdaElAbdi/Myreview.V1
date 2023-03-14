@@ -7,6 +7,7 @@ export class VariablesSharedService {
 
   profil:string="user";
   Afficheprofile:boolean=false;
+  authenticated:boolean=false;
 
   constructor() { }
 }
