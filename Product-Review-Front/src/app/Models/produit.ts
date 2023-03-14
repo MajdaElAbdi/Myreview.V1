@@ -1,10 +1,13 @@
 
 export interface ProduitModel{
-
-  _id : string ;
-  nom : string ;
-  prix : number;
-  id_user : number;
-  image : string
-
+  _id : string,
+  category : string,
+  owner : string,
+  title: string,
+  description: string,
+  photo: string,
+  price: number,
+  stockQuantity: number,
+  reviews : string
+  raiting : number;
 }
