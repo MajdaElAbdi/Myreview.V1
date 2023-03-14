@@ -11,7 +11,8 @@ import { UsersComponent } from './users/users.component';
 import { LoginComponent } from './login/login.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { ProfileComponent } from './profile/profile.component';
- 
+import { AdministrationComponent } from './administration/administration.component';
+
 
 
 const routes: Routes =[
@@ -19,7 +20,9 @@ const routes: Routes =[
   { path: "users", component:UsersComponent},
   {path: "login", component:LoginComponent},
   {path: "signin", component:SignInComponent},
-  {path: "profile", component:ProfileComponent}
+  {path: "profile", component:ProfileComponent},
+  {path: "administration", component:AdministrationComponent},
+  {path:'' ,redirectTo:'/login',pathMatch:'full'}
 ]
 
 
@@ -31,7 +34,8 @@ const routes: Routes =[
     UsersComponent,
     LoginComponent,
     SignInComponent,
-    ProfileComponent
+    ProfileComponent,
+    AdministrationComponent
   ],
 
   imports: [

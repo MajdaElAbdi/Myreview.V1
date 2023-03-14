@@ -5,6 +5,7 @@ import { catchError, Observable, throwError } from 'rxjs';
 import { UserModel } from '../Models/user';
 import { LoginServiceService } from '../Services/login-service.service';
 import { UserServiceService } from '../Services/user-service.service ';
+import {VariablesSharedService} from "../Services/variables-shared.service";
 
 @Component({
   selector: 'app-login',
@@ -21,8 +22,13 @@ export class LoginComponent {
   public error: number = 0;
   ErrorMessage: any;
   user!: UserModel;
-  date!:Date; 
-  constructor(private router: Router, public serviceLogin: LoginServiceService, private Fb: FormBuilder) { }
+  date!:Date;
+
+
+
+
+
+  constructor(private router: Router, public serviceLogin: LoginServiceService, private Fb: FormBuilder, private shared:VariablesSharedService) { }
 
   ngOnInit(): void {
 
@@ -37,14 +43,16 @@ export class LoginComponent {
 
   }
 
-  SignIn() {
+  SignIn() :boolean{
+
     this.userForm = this.loginForm.value;
-    let validUser: Boolean = false;
-console.log(this.userForm);
+    let validUser: boolean = false;
+
+
     this.serviceLogin.getByEmail(this.userForm.email).subscribe({
       next: (data => {
         this.user = data[0];
-        console.log(this.user.email);
+        //console.log(this.user.email);
 
       }), error: err => {
         console.log(err);
@@ -56,57 +64,58 @@ console.log(this.userForm);
 
       if (this.user.email === this.userForm.email && this.user.password == this.userForm.password) {
         validUser = true;
-        alert(validUser);
+        //alert(validUser);
         this.loggedUser = this.userForm.email;
         this.isloggedIn = true;
         this.role = this.userForm.userType;
-        this.router.navigate(['/produits']);
-        if (this.role === "ADMIN") {
+        if (this.role === "admin") {
           this.isAdmin = true;
           localStorage.setItem('isAdmin', String(this.isAdmin));
         }
-        else { 
-          this.isAdmin = false; 
-        localStorage.setItem('isAdmin', String(this.isAdmin)); 
+        else {
+          this.isAdmin = false;
+        localStorage.setItem('isAdmin', String(this.isAdmin));
         }
 
         localStorage.setItem('id', String(this.user._id));
-        localStorage.setItem('name', String(this.user.name));
-        localStorage.setItem('email', this.user.email);
-        localStorage.setItem('gender', this.user.gender);
+        localStorage.setItem('userType', String(this.user.userType));
+        localStorage.setItem('loggedUser', this.loggedUser);
+        localStorage.setItem('isloggedIn',String(this.isloggedIn));
        // let date=this.user.date.getFullYear.toString()+'/'+this.user.date.getMonth.toString()+'/'+this.user.date.getDay.toString();
-       
-       this.date=this.user.date
-     
-        localStorage.setItem('dateOfBirth',this.user.date.getFullYear.toString() );
-        localStorage.setItem('isloggedIn', String(this.isloggedIn));
-        this.router.navigate(['produits']);
 
-       /* name: this.Fb.control("" ),
-email: this.Fb.control("",[Validators.required, Validators.email]),
-date: this.Fb.control(""),
-password: this.Fb.control("",[Validators.required ]),
-genre:this.Fb.control("")*/
       }
-      else {alert("problem in your authentification :either your password or the email ane correct");}
-    }}
+
+    }
+    return validUser;
+  }
 
 
-    //return validUser;
+
 
     onLoggedin() {
       let isValidUser: Boolean = this.isloggedIn;
       if (isValidUser == false) this.error = 1;
       else if (isValidUser && this.isAdmin) {
-        this.error = 0; console.log("admiiiiin");
-        this.router.navigate(['acceuiladmin']);
+        this.error = 0;
+        this.shared.Afficheprofile=true;
+        this.router.navigate(['administration']);
       }
-      else if (isValidUser && this.role === "CLIENT") {
-        this.error = 0; console.log("clienttttttt");
+      else if (isValidUser && this.role === "user") {
+        this.error = 0;
+        this.shared.profil="user";
+        localStorage.setItem('role', String(this.shared.profil));
+        this.shared.Afficheprofile=true;
+        this.router.navigate(['produits']);
+      }
+      else if (isValidUser && this.role === "owner") {
+        this.error = 0;
+        this.shared.profil="owner";
+        localStorage.setItem('role', String(this.shared.profil));
+        this.shared.Afficheprofile=true;
         this.router.navigate(['produits']);
       }
     }
-    sinscire() { this.router.navigate(['sign-in']); }
+    sinscire() { this.router.navigate(['signin']); }
 
 
   }
