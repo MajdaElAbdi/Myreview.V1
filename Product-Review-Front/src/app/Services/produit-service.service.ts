@@ -24,7 +24,7 @@ BackenURL : string = "http://localhost:3007";
   }
 
   public getAllCommentsForP(id_product : string) : Observable<Array<CommentModel>>{
-    return this.http.get<Array<CommentModel>>(this.BackenURL+"/commentsbyProd/"+id_product);
+    return this.http.get<Array<CommentModel>>(this.BackenURL+"/commentsbyProduct/"+id_product);
   }
 
   public getById(id_product : string) : Observable<ProduitModel>{

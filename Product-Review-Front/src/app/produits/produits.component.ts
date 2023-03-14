@@ -91,8 +91,7 @@ TextAreaContents!:string;
 
   // Définissez une fonction pour redimensionner automatiquement le textarea
 
-
-  redimensionnerTextarea() {
+ redimensionnerTextarea() {
     /* setTimeout(() => {
       const textarea = document.getElementsByTagName('textarea')[0];
       textarea.style.height = 'auto';
@@ -169,7 +168,9 @@ TextAreaContents!:string;
 
   ChargerComments(id_product : string) {
 
-    this.ListCommentaires=this.produitService.getAllcomments().pipe(catchError(err=>{
+    this.ListCommentaires=this.produitService.getAllCommentsForP(id_product).pipe(catchError(err=>{
+      //console.log(this.ListCommentaires);
+      console.log(id_product);
       this.ErrorMessage=err.message;
       return throwError(err);
     }));
