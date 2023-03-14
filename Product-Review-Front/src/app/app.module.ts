@@ -11,15 +11,20 @@ import { UsersComponent } from './users/users.component';
 import { LoginComponent } from './login/login.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { ProfileComponent } from './profile/profile.component';
- 
+import { AdministrationComponent } from './administration/administration.component';
+import {AuthGuard} from "./auth.guard";
+
 
 
 const routes: Routes =[
   { path: "produits", component:ProduitsComponent},
-  { path: "users", component:UsersComponent},
+  { path: "users", component:UsersComponent, canActivate: [AuthGuard]},
   {path: "login", component:LoginComponent},
   {path: "signin", component:SignInComponent},
-  {path: "profile", component:ProfileComponent}
+  {path: "profile", component:ProfileComponent, canActivate: [AuthGuard]},
+  {path: "administration", component:AdministrationComponent, canActivate: [AuthGuard]},
+  {path:'' ,redirectTo:'/login',pathMatch:'full'},
+  { path: '**', redirectTo: '/produits' }
 ]
 
 
@@ -31,7 +36,8 @@ const routes: Routes =[
     UsersComponent,
     LoginComponent,
     SignInComponent,
-    ProfileComponent
+    ProfileComponent,
+    AdministrationComponent
   ],
 
   imports: [

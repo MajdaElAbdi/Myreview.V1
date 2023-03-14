@@ -60,15 +60,7 @@ export class ProduitsComponent {
       contents : this.Fb.control("")
     });
 
-    if(this.ListCommentaires)
-      alert("les commentaires sont là");
 
-
-
-  }
-
-
-  Supprimer(p: ProduitModel) {
 
 
 
