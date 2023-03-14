@@ -1,5 +1,5 @@
 
-<div class="container mt-2">
+<!--<div class="container mt-2">
   <ng-container *ngIf="ListProduits | async as data; else failureOrLoading">
 
     <div class="card">
@@ -14,10 +14,10 @@
             <tbody>
              <tr *ngFor="let p of ListProduits |  async ">
                <td>{{p._id}}</td>
-               <td>{{p.nom}}</td>
-               <td>{{p.prix}}</td>
-               <td>{{p.id_user}}</td>
-               <!--<td>{{p.image}}</td>-->
+               <td>{{p.title}}</td>
+               <td>{{p.price}}</td>
+               <td>{{p.reviews}}</td>
+
                <td>
                  <button (click)="Supprimer(p)" class="btn btn-danger" >
                    <i class="bi bi-trash"></i>
@@ -45,4 +45,63 @@
     </ng-template>
   </ng-container>
 
+</div>
+-->
+
+
+<div class="container mt-2">
+  <div class="d-flex flex-row flex-wrap justify-content-center">
+    <div class="card mr-2 w-25 h-100  mx-3 my-3" *ngFor="let p of this.ListProduits| async">
+      <img class="card-img-top" src="{{p.photo}}" alt="{{p.title}}">
+      <div class="card-body">
+        <h5 class="card-title">{{p.title}}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">{{p.price}} €</h6>
+        <div class="rating-container">
+          <span class="rating-label">Noter:</span>
+          <div class="rating-stars">
+            <i id="{{ 'star-1-' + p._id }}" class="far fa-star" (mouseover)="highlightStar(p._id, 1)" (mouseout)="resetStars(p._id,1)" (click)="rateProduct(p, 1)"></i>
+            <i id="{{ 'star-2-' + p._id }}" class="far fa-star" (mouseover)="highlightStar(p._id, 2)" (mouseout)="resetStars(p._id,2)" (click)="rateProduct(p, 2)"></i>
+            <i id="{{ 'star-3-' + p._id }}" class="far fa-star" (mouseover)="highlightStar(p._id, 3)" (mouseout)="resetStars(p._id,3)" (click)="rateProduct(p, 3)"></i>
+            <i id="{{ 'star-4-' + p._id }}" class="far fa-star" (mouseover)="highlightStar(p._id, 4)" (mouseout)="resetStars(p._id,4)" (click)="rateProduct(p, 4)"></i>
+            <i id="{{ 'star-5-' + p._id }}" class="far fa-star" (mouseover)="highlightStar(p._id, 5)" (mouseout)="resetStars(p._id,5)" (click)="rateProduct(p, 5)"></i>
+          </div>
+        </div>
+        <button class="btn btn-secondary" (click)="openCommentBox(p._id)">Commenter</button>
+        <div class="comment-box-overlay" [hidden]="!showCommentBox" (click)="closeCommentBox()"></div>
+        <div class="comment-box" [hidden]="!showCommentBox">
+          <button class="close-button" (click)="closeCommentBox()">&#10005;</button>
+          <div class="comment-input-container">
+            <textarea (input)="redimensionnerTextarea()" #commentTextarea class="comment-text" [(ngModel)]="TextAreacommentaire" (keydown.enter)="envoyerCommentaire(p._id)"></textarea>
+            <div class="comment-input-icons">
+              <i class="fas fa-camera" title="Charger une photo"></i>
+              <i class="far fa-smile" title="Ajouter un emoji"></i>
+              <i class="fas fa-paper-plane" title="Envoyer le commentaire" (click)="envoyerCommentaire(p._id)"></i>
+            </div>
+          </div>
+
+
+            <div class="comment-container" [hidden]="!showComments">
+              <h4 class="card-title mt-4">Commentaires :</h4>
+              <div class="comment-list">
+                <div class="comment-item" *ngFor="let comment of ListCommentaires | async" id="commentList-{{ comment._id }}">
+                  <div class="comment-avatar">
+                    <img src="{{ comment.images}}" >
+                  </div>
+                  <div class="comment-content">
+                    <div class="comment-header">
+                      <span class="comment-author">{{ comment.contents}}</span>
+                      <span class="comment-date">{{ comment.date_comment | date: 'dd/MM/yyyy' }}</span>
+                    </div>
+                    <div class="comment-body">
+                      {{ comment.contents }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
 </div>
