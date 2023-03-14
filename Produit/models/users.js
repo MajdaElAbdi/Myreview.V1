@@ -13,11 +13,16 @@ email : {
     unique: true
 },
 gender : String,
-status : String,
+adress : String,
+userType: {
+    type: String,
+    enum : ['user','owner','admin'],
+    default: 'user'
+  },
 date:  {
     type: Date,
     required: 'date please'
-   
+   //date de naissance
 },
 password: {
     type: String,

@@ -6,6 +6,8 @@ export interface UserModel{
     email :  string;
     date :  string;
     password:string;
-    gender:string
+    gender:string;
+    address:string;
+    userType:string
  
  }

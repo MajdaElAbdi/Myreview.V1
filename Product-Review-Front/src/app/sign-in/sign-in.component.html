@@ -1,0 +1,55 @@
+<div class="container">
+   
+    <h1>User Registration</h1>
+  
+    <form  (ngSubmit)="add()" [formGroup]="profileForm">
+  
+        <div class="form-group">
+  
+            <label for="name">FirstName</label><br>
+  
+            <input type="text" class="form-control" formControlName="name">
+  
+          
+        </div>
+  
+        <pre></pre>
+        <div class="form-group">
+  
+          <label for="email">EmailID</label><br>
+  
+          <input type="email" class="form-control" formControlName="email"  >
+  
+      </div>
+      <pre></pre>
+      <div class="form-group">
+  
+        <label for="date">date</label><br>
+  
+        <input type="date" class="form-control" formControlName="date">
+  
+    </div>
+    
+  
+      <div class="form-group">
+  
+          <label for="password">Password</label><br>
+  
+          <input type="text" class="form-control" formControlName="password">
+  
+      </div>
+      <pre></pre>
+      <div class="form-group">
+  
+        <label for="gender">gender</label><br>
+  
+        <input type="text"class="form-control" formControlName="gender">
+         
+    </div>
+      
+  
+      <button  [disabled]="!profileForm.valid" class="btn btn-primary" type="submit">Submit</button>
+  
+  </form>
+  
+  </div>

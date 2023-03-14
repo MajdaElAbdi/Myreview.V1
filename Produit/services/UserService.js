@@ -3,9 +3,9 @@ const user = require('../models/users').User;
 
 const saveUser = async (user1) => {
     try {
-        const user2 =new user(user1);
+        const user2 = new user(user1);
         await user2.save();
-        
+
         console.log("user saved successfully!");
         return user2;
     } catch (error) {
@@ -17,32 +17,33 @@ const saveUser = async (user1) => {
 const getUser = async (id) => {
 
     try {
-console.log('getUser');
-var c='hi';
+        console.log('getUser');
+        var c = 'hi';
         const users = await user.findById(id);
-        c='hoo';
+        c = 'hoo';
         console.log('getUser');
         return users;
-    }catch (error) {
-            throw new Error(`Error retrieving product with id ${id}: ${error}`);
-        }
-    }; 
-   
+    } catch (error) {
+        throw new Error(`Error retrieving product with id ${id}: ${error}`);
+    }
+};
 
-    
-const getByEmail = async (email) => {
+
+
+const getByEmail = async (mail) => {
 
     try {
-console.log('getUser');
- 
-        const users = await user.findOne(email);
-        
+        console.log('service');
+        console.log(mail);
+
+        const users = await user.find({email:mail} );
+
         return users;
-    }catch (error) {
-            throw new Error(`Error retrieving product with id ${id}: ${error}`);
-        }
-    }; 
-   
+    } catch (error) {
+        throw new Error(`Error retrieving product with id ${id}: ${error}`);
+    }
+};
+
 
 const getAllUsers = async () => {
     try {

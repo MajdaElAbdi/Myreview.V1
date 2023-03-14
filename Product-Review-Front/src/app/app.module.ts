@@ -9,12 +9,14 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import { UsersComponent } from './users/users.component';
 import { LoginComponent } from './login/login.component';
+import { SignInComponent } from './sign-in/sign-in.component';
 
 
 const routes: Routes =[
   { path: "produits", component:ProduitsComponent},
   { path: "users", component:UsersComponent},
-  {path: "login", component:LoginComponent}
+  {path: "login", component:LoginComponent},
+  {path: "signin", component:SignInComponent}
 ]
 
 
@@ -24,7 +26,8 @@ const routes: Routes =[
     NavBarComponent,
     ProduitsComponent,
     UsersComponent,
-    LoginComponent
+    LoginComponent,
+    SignInComponent
   ],
 
   imports: [
