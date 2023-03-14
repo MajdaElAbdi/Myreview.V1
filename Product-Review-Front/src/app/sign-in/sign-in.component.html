@@ -25,7 +25,7 @@
   
         <label for="date">date</label><br>
   
-        <input type="date"   name="date"  ngModel required>
+        <input class="form-group" type="date"   name="date"  ngModel required>
   
     </div>
     
@@ -34,14 +34,23 @@
   
           <label for="password">Password</label><br>
   
-          <input type="text"   name="password" ngModel required>
+          <input class="form-group" type="text"   name="password" ngModel required>
   
       </div>
       <pre></pre><div>
   
         <label for="userType"> user Type</label><br>
 
-        <input type="text"  name="userType"  ngModel required  >
+        
+        
+            <label>
+                <input class="form-group" type="radio" value="user" name='userType'  ngModel>
+                  <span>user</span>
+              </label>
+              <label>
+                <input type="radio" value="owner" name='userType'  ngModel >
+                  <span>owner</span>
+              </label>
        
     </div>
      <pre></pre>
@@ -57,6 +66,7 @@
 
       
     <div>
+        <label for="gender"> gender</label><br>
         <label>
             <input type="radio" value="Male" name='gender' name="gender"  ngModel>
               <span>male</span>
@@ -67,15 +77,8 @@
           </label>
     </div>
    
-   <!--<p>{{gender}}</p>--> 
+ 
    <button type="submit" [disabled]="!loginForm.valid">sign-in</button>
   
   </form>
-  <!--<p>
-  </div>
-  <form #loginForm="ngForm" (ngSubmit)="onSubmit()">
-    <input type="text" name="username" ngModel required>
-    <input type="password" name="password" ngModel required>
-
-    <button type="submit" [disabled]="!loginForm.valid">Login</button>
-  </form></p>--> 
+ 

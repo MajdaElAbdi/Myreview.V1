@@ -20,12 +20,16 @@
           <label for="password">Password</label><br>
   
           <input type="text" class="form-control" formControlName="password">
-  
+    <span class="text-danger" *ngIf=" loginForm.touched && 
+    loginForm.controls['password']  
+         && loginForm.controls['password'].errors!['required']  "> 
+          Le password est obligatoire frère.</span>
       </div>
+    
       
       
   
-      <button  [disabled]="!loginForm.valid" class="btn btn-primary" type="submit" routerLink="/produits"  >logIn</button>
+      <button  [disabled]="!loginForm.valid" class="btn btn-primary" type="submit"   >logIn</button>
 
       <button  routerLink="/signin"    class="btn btn-primary" type="submit">sinscire</button>
        

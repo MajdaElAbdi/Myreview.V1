@@ -40,7 +40,7 @@ export class LoginComponent {
   SignIn() {
     this.userForm = this.loginForm.value;
     let validUser: Boolean = false;
-
+console.log(this.userForm);
     this.serviceLogin.getByEmail(this.userForm.email).subscribe({
       next: (data => {
         this.user = data[0];
@@ -60,7 +60,7 @@ export class LoginComponent {
         this.loggedUser = this.userForm.email;
         this.isloggedIn = true;
         this.role = this.userForm.userType;
-
+        this.router.navigate(['/produits']);
         if (this.role === "ADMIN") {
           this.isAdmin = true;
           localStorage.setItem('isAdmin', String(this.isAdmin));
