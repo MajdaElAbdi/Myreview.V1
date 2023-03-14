@@ -13,7 +13,6 @@ email : {
     unique: true
 },
 gender : String,
-adress : String,
 userType: {
     type: String,
     enum : ['user','owner','admin'],
@@ -28,11 +27,13 @@ password: {
     type: String,
     required:true
    
-}
+},
+address:String,
+image:String
 
 });
 
-const User = mongoose.model('userrrr', userSchema);
+const User = mongoose.model('util', userSchema);
 
 module.exports = {User};
 

@@ -30,6 +30,7 @@ date: this.Fb.control(""),
 password: this.Fb.control("",[Validators.required ]),
 gender:this.Fb.control(""),
 userType:this.Fb.control(""),
+image:this.Fb.control(""),
 address:this.Fb.control("",[Validators.required ])
 });
 
@@ -59,6 +60,7 @@ this.userService.addUser(user).subscribe({
   next:value=>{
     //route
     alert('user est ajoute');
+   // console.log(next);
     this.router.navigate(['/login']);
   },
     error:err=>{console.log(err)}

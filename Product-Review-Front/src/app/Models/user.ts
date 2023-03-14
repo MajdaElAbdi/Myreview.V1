@@ -8,6 +8,7 @@ export interface UserModel{
     password:string;
     gender:string;
     address:string;
-    userType:string
+    userType:string;
+    image:string
  
  }
