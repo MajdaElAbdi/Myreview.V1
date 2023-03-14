@@ -14,7 +14,7 @@ const Product = require('../models/produits').Produit;
 const router = express.Router();
 const app = express();
 const bodyParser = require("body-parser")
-  
+const commentRouter=require('../routes/CommentRoute').router;
 // New app using express module
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -30,7 +30,7 @@ app.use(cors());
 
 app.use('/produits',productRouter.router);
 app.use('/users',userRouter.router);
-
+app.use('/commentaires',commentRouter);
 
 
 connexion.once('open', async () => {
