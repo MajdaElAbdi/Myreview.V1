@@ -25,12 +25,19 @@ constructor(private router: Router, public serviceProfile:ProfileService, privat
 
 ngOnInit() : void{
   this.id=localStorage.getItem('id');
+<<<<<<< HEAD
 /*this.email=localStorage.getItem('email');
 this.name=localStorage.getItem('name');
 this.dateOfBirth=localStorage.getItem('dateOfBirth');
 alert(this.dateOfBirth);
 this.gender=localStorage.getItem('gender');*/
 
+=======
+ 
+ 
+ 
+>>>>>>> bf593e92dcc873b35ee5967ef23a0cfe9e080ebf
+>>>>>>> 08d4d755508c1388a4404ecec1cf007949161b1e
 this.serviceProfile.getUser(this.id).subscribe({
   next: (data => {
     this.user = data;
@@ -45,7 +52,13 @@ this.serviceProfile.getUser(this.id).subscribe({
     const bdate = new Date(this.dateOfBirth);
     const timeDiff = Math.abs(Date.now() - bdate.getTime() );
     this.age = Math.floor((timeDiff / (1000 * 3600 * 24)) / 365);
+<<<<<<< HEAD
 
+=======
+    this.ListProduits=this.produitService.getByUserId(this.id).pipe(catchError(err=>{
+      this.ErrorMessage=err.message;
+      return throwError(err);  }));
+>>>>>>> 08d4d755508c1388a4404ecec1cf007949161b1e
   }), error: err => {
     console.log(err);
   }
@@ -53,16 +66,55 @@ this.serviceProfile.getUser(this.id).subscribe({
 console.log(this.user.address);
 
 }
+<<<<<<< HEAD
+=======
 
 
+redimensionnerTextarea() {}
 
-  logout() {
+toggleEmojiBox() {}
 
-    localStorage.removeItem('loggedUser');
-    localStorage.removeItem('isloggedIn');
-    localStorage.removeItem('isAdmin');
-    localStorage.removeItem('Role');
-    this.router.navigate(['login']);
+ajouterEmoji(emoji: any) {}
+
+chargerPhoto() {}
+
+async envoyerCommentaire(id_prod: string) {
+
+this.comment.id_publication = id_prod;
+this.comment.contents = this.TextAreacommentaire;
+this.comment.date_comment = new Date();
+this.comment.images = ""
+
+//alert(this.comment.contents);
+console.log(this.comment);
+let comm: CommentModel;
+//Ajoutez le commentaire à la base de données
+this.produitService.SaveComment(this.comment).subscribe({
+  next: (data => {
+    comm = data;
+    console.log(comm);
+  }),
+  error: err => {
+    console.log(err);
   }
+});
+// Réinitialisez la zone de texte
+this.TextAreacommentaire = '';
+
+// Chargez tous les commentaires pour ce produit
+this.ListCommentaires = await this.produitService.getAllcomments();
+
+// Affichez tous les commentaires dans la zone de commentaires
+this.showComments = true;
+
+const commentList = document.getElementById(`commentList-${id_prod}`);
+if (commentList) {
+  commentList.scrollTop = commentList.scrollHeight;
+
+}
+
+this.closeCommentBox();
+>>>>>>> 08d4d755508c1388a4404ecec1cf007949161b1e
+
 
 }
