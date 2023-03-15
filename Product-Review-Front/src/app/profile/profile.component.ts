@@ -48,14 +48,23 @@ constructor(private router: Router,private produitService: ProduitServiceService
 
 ngOnInit() : void{
   this.id=localStorage.getItem('id');
+<<<<<<< HEAD
+/*this.email=localStorage.getItem('email');
+this.name=localStorage.getItem('name');
+this.dateOfBirth=localStorage.getItem('dateOfBirth');
+alert(this.dateOfBirth);
+this.gender=localStorage.getItem('gender');*/
+
+=======
  
  
  
+>>>>>>> bf593e92dcc873b35ee5967ef23a0cfe9e080ebf
 this.serviceProfile.getUser(this.id).subscribe({
   next: (data => {
     this.user = data;
     this.email=this.user.email;
-  
+
     this.gender=this.user.gender;
     this.name=this.user.name;
     this.dateOfBirth=this.user.date;
@@ -65,9 +74,13 @@ this.serviceProfile.getUser(this.id).subscribe({
     const bdate = new Date(this.dateOfBirth);
     const timeDiff = Math.abs(Date.now() - bdate.getTime() );
     this.age = Math.floor((timeDiff / (1000 * 3600 * 24)) / 365);
+<<<<<<< HEAD
+
+=======
     this.ListProduits=this.produitService.getByUserId(this.id).pipe(catchError(err=>{
       this.ErrorMessage=err.message;
       return throwError(err);  }));
+>>>>>>> bf593e92dcc873b35ee5967ef23a0cfe9e080ebf
   }), error: err => {
     console.log(err);
   }
@@ -146,6 +159,16 @@ if (commentList) {
 
 this.closeCommentBox();
 
+
+
+  logout() {
+
+    localStorage.removeItem('loggedUser');
+    localStorage.removeItem('isloggedIn');
+    localStorage.removeItem('isAdmin');
+    localStorage.removeItem('Role');
+    this.router.navigate(['login']);
+  }
 
 }
 
