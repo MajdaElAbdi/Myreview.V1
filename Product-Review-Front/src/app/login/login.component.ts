@@ -24,7 +24,7 @@ export class LoginComponent {
   user!: UserModel;
   date!:Date;
 
-
+userLog = new UserModel();
 
 
 
@@ -43,31 +43,33 @@ export class LoginComponent {
 
   }
 
-  SignIn() :boolean{
+  SignIn(usersaisie:UserModel) :boolean{
 
     this.userForm = this.loginForm.value;
     let validUser: boolean = false;
 
 
-    this.serviceLogin.getByEmail(this.userForm.email).subscribe({
+
+    this.serviceLogin.getByEmail(usersaisie.email).subscribe({
       next: (data => {
         this.user = data[0];
-        //console.log(this.user.email);
+        //alert(this.user.email+" it's ok");
+        //alert(this.userLog.email+" it's ok pour userlog aussi");
 
       }), error: err => {
         console.log(err);
       }
     });
 
-    if (this.user) console.log(this.user);
+    if (this.user) //console.log(this.user);
     if (this.user != null) {
 
-      if (this.user.email === this.userForm.email && this.user.password == this.userForm.password) {
-        validUser = true;
-        //alert(validUser);
-        this.loggedUser = this.userForm.email;
+      if (this.user.email === usersaisie.email && this.user.password == usersaisie.password) {
+       validUser = true;
+       // alert(validUser+ "doit etre true");
+        this.loggedUser = this.user.email;
         this.isloggedIn = true;
-        this.role = this.userForm.userType;
+        this.role = this.user.userType;
         if (this.role === "admin") {
           this.isAdmin = true;
           localStorage.setItem('isAdmin', String(this.isAdmin));
@@ -76,7 +78,7 @@ export class LoginComponent {
           this.isAdmin = false;
         localStorage.setItem('isAdmin', String(this.isAdmin));
         }
-
+       // alert("on est ici frère");
         localStorage.setItem('id', String(this.user._id));
         localStorage.setItem('userType', String(this.user.userType));
         localStorage.setItem('loggedUser', this.loggedUser);
@@ -86,6 +88,8 @@ export class LoginComponent {
       }
 
     }
+
+
     return validUser;
   }
 
@@ -93,13 +97,21 @@ export class LoginComponent {
 
 
     onLoggedin() {
-      let isValidUser: Boolean = this.isloggedIn;
-      if (isValidUser == false) this.error = 1;
+    if(localStorage.getItem("isloggedIn")==="true" && localStorage.getItem("isloggedIn")==="true"){
+      this.router.navigate(['produits']);
+    }
+      let isValidUser: Boolean = this.SignIn(this.userLog);
+      //alert(this.isloggedIn);
+      if (isValidUser == false)
+        this.error = 1;
+
+
       else if (isValidUser && this.isAdmin) {
         this.error = 0;
         this.shared.Afficheprofile=true;
         this.router.navigate(['administration']);
       }
+
       else if (isValidUser && this.role === "user") {
         this.error = 0;
         this.shared.profil="user";

@@ -1,7 +1,55 @@
-#para1 {
-    
+.navbar {
+  background-color: #343a40;
+}
 
-    float:right;
-    color:red
- 
-  }
+.navbar-brand img {
+  margin-left: 20px;
+}
+
+.navbar-nav .nav-item .nav-link {
+  color: white;
+}
+
+.navbar-nav .nav-item.dropdown .dropdown-menu {
+  background-color: #343a40;
+}
+
+.navbar-nav .nav-item.dropdown .dropdown-menu a {
+  color: white;
+}
+
+.navbar-nav .nav-item.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+.form-control {
+  width: 400px;
+}
+
+.btn-outline-success {
+  margin-left: -50px;
+}
+
+.navbar-nav.ml-auto .nav-item .nav-link {
+  margin-right: 20px;
+}
+
+.fa-user-circle,
+.fa-sign-in-alt,
+.fa-search {
+  font-size: 1.2rem;
+}
+
+.fa-search {
+  margin-right: 0;
+  margin-left: -30px;
+}
+
+.fa-user-circle,
+.fa-sign-in-alt {
+  margin-right: -10px;
+}
+
+.dropdown-menu {
+  border: none;
+}

@@ -30,12 +30,12 @@ this.name=localStorage.getItem('name');
 this.dateOfBirth=localStorage.getItem('dateOfBirth');
 alert(this.dateOfBirth);
 this.gender=localStorage.getItem('gender');*/
- 
+
 this.serviceProfile.getUser(this.id).subscribe({
   next: (data => {
     this.user = data;
     this.email=this.user.email;
-  
+
     this.gender=this.user.gender;
     this.name=this.user.name;
     this.dateOfBirth=this.user.date;
@@ -45,7 +45,7 @@ this.serviceProfile.getUser(this.id).subscribe({
     const bdate = new Date(this.dateOfBirth);
     const timeDiff = Math.abs(Date.now() - bdate.getTime() );
     this.age = Math.floor((timeDiff / (1000 * 3600 * 24)) / 365);
-     
+
   }), error: err => {
     console.log(err);
   }
@@ -54,5 +54,15 @@ console.log(this.user.address);
 
 }
 
+
+
+  logout() {
+
+    localStorage.removeItem('loggedUser');
+    localStorage.removeItem('isloggedIn');
+    localStorage.removeItem('isAdmin');
+    localStorage.removeItem('Role');
+    this.router.navigate(['login']);
+  }
 
 }
