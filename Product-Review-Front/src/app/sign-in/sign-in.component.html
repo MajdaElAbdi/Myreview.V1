@@ -3,7 +3,7 @@
     <h1>User Registration</h1>
     <form #loginForm="ngForm" (ngSubmit)="add()">
   
-        <div >
+        <div class="form-group">
   
             <label for="name">FirstName</label><br>
   
@@ -12,23 +12,23 @@
           
         </div>
   
-        <pre></pre>
-        <div >
+        
+        <div class="form-group">
   
           <label for="email">EmailID</label><br>
   
           <input type="email"   name="email"   ngModel required>
   
       </div>
-      <div >
+      <div class="form-group">
   
         <label for="image">image</label><br>
 
         <input type="text"   name="image"   ngModel required>
-
     </div>
+        
       <pre></pre>
-      <div >
+      <div class="form-group">
   
         <label for="date">date</label><br>
   
@@ -37,7 +37,7 @@
     </div>
     
   
-      <div  >
+    <div class="form-group">
   
           <label for="password">Password</label><br>
   
@@ -61,18 +61,17 @@
        
     </div>
      <pre></pre>
-    <div >
+     <div class="form-group">
   
         <label for="address">address</label><br>
 
         <input type="text"   name="address"  ngModel required>
          
     </div>
-    <pre></pre>
-    <pre></pre>
+    
 
       
-    <div>
+    <div class="form-group">
         <label for="gender"> gender</label><br>
         <label>
             <input type="radio" value="Male" name='gender' name="gender"  ngModel>
@@ -87,5 +86,5 @@
  
    <button type="submit" [disabled]="!loginForm.valid">sign-in</button>
   
-  </form>
+  </form>  </div>
  
