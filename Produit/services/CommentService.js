@@ -32,7 +32,7 @@ const getComment = async (id) => {
 
 const getAllComments = async () => {
     try {
-        const comment = await commentaire.find({});
+        const comment = await commentaire.find();
         return comment;
     } catch (error) {
         throw new Error(`Error retrieving all comments: ${error}`);
@@ -40,11 +40,12 @@ const getAllComments = async () => {
 };
 
 
-async function findAllCommentByIdProduct(id_publication) {
-    try { const comments = await commentaire.find({ id_publication: id_publication });
+async function findAllCommentByIdProduct(id_pub) {
+    try { const comments = await commentaire.find({ id_publication: id_pub });
+        console.log(comments);
     return comments;
     } catch (error) {
-        throw new Error(`Error deleting comment with id ${id}: ${error}`);
+        throw new Error(`Error deleting comment with id ${id_pub}: ${error}`);
     }
 }
 

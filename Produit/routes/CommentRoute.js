@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
     }
 });
 
-router.get('/commentsbyProd/:id_prod', async (req, res) => {
+router.get('/commentsbyProduct/:id_publication', async (req, res) => {
     try {
         const idp=req.params.id_publication;
         const ListComments = await CommentaireService.findAllCommentByIdProduct(idp);
