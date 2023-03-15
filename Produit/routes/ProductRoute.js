@@ -31,16 +31,6 @@ router.get('/:id', async (req, res) => {
 });
 
 
-router.get('/user/:id', async (req, res) => {
-    try {
-        console.log(req.params.id);
-        const product = await ProductsFetcher.getProductByOwner(req.params.id);
-        res.json(product);
-    } catch (error) {
-        res.status(500).send(error.message);
-    }
-});
-
 router.delete('/:id', async  (req, res)=>{
     try{
         const product = await ProductsFetcher.deleteProduct(req.params.id);

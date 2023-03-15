@@ -30,9 +30,6 @@ BackenURL : string = "http://localhost:3007";
   public getById(id_product : string) : Observable<ProduitModel>{
     return this.http.get<ProduitModel>(this.BackenURL+"/produits/"+id_product);
   }
-  public getByUserId(id_user : string) : Observable<Array<ProduitModel>>{
-    return this.http.get<Array<ProduitModel>>(this.BackenURL+"/produits/user/"+id_user);
-  }
 
   public SaveComment(comment: CommentModel) : Observable<CommentModel>{
     return this.http.post<CommentModel>(this.BackenURL+"/commentaires",comment);
